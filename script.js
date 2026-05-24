@@ -459,7 +459,7 @@ setSelectedSize(selectedSizeInput.value || '38');
     { name: 'Наталя, Дніпро',   msg: 'замовила — останні пари! 🖤' },
     { name: 'Таня, Львів',      msg: 'щойно замовила сандалі 🖤' },
     { name: 'Віка, Запоріжжя',  msg: 'оформила замовлення (37р.) 🖤' },
-    { name: 'Аліна, Полтава',   msg: 'щойно забрала сандалі за 799 грн 🖤' },
+    { name: 'Аліна, Полтава',   msg: 'щойно забрала сандалі за 699 грн 🖤' },
     { name: 'Дарина, Вінниця',  msg: 'замовила для подарунку 🖤' },
     { name: 'Крістіна, Суми',   msg: 'щойно замовила сандалі 🖤' },
     { name: 'Юля, Луцьк',       msg: 'оформила замовлення 🖤' },
@@ -594,7 +594,7 @@ async function sendPendingOrder(mode, extra = {}) {
     clientOrderKey: pendingOrderKey,
     meta: metaBrowserData(leadEventId),
     product: 'Black Breeze Sandals',
-    price: '799',
+    price: '699',
   };
   const result = await postJSON('/api/order', payload);
 
@@ -624,7 +624,7 @@ async function sendPendingOrder(mode, extra = {}) {
       successCloseBtn.textContent = 'ЗАКРИТИ';
     }
     if (instantOrderBtn) instantOrderBtn.disabled = false;
-    fbTrack('Lead', { content_name: 'Black Breeze Order', value: 799, currency: 'UAH' }, { eventId: leadEventId });
+    fbTrack('Lead', { content_name: 'Black Breeze Order', value: 699, currency: 'UAH' }, { eventId: leadEventId });
     Analytics.track('order_success', { size: pendingOrder.size, mode });
     return { success: true, id: result.id, payload };
   }
@@ -633,8 +633,8 @@ async function sendPendingOrder(mode, extra = {}) {
   instantOrderSent = true;
   pendingManualOrderId = null;
   pendingOrderKey = '';
-  fbTrack('Lead', { content_name: 'Black Breeze Order', value: 799, currency: 'UAH' }, { eventId: leadEventId });
-  ttTrack('Purchase', { content_type: 'product', content_id: 'black-breeze-sandals-001', content_ids: ['black-breeze-sandals-001'], content_name: 'Black Breeze Sandals', value: 799, currency: 'UAH', quantity: 1 });
+  fbTrack('Lead', { content_name: 'Black Breeze Order', value: 699, currency: 'UAH' }, { eventId: leadEventId });
+  ttTrack('Purchase', { content_type: 'product', content_id: 'black-breeze-sandals-001', content_ids: ['black-breeze-sandals-001'], content_name: 'Black Breeze Sandals', value: 699, currency: 'UAH', quantity: 1 });
   Analytics.track('order_success', { size: pendingOrder.size, mode });
   resetOrderForm();
   pendingOrder = null;
@@ -809,8 +809,8 @@ document.getElementById('orderForm').addEventListener('submit', async e => {
 
   await ttIdentifyPhone(phone);
   updateMetaAdvancedMatching({ name, phone });
-  const checkoutEventId = fbTrack('InitiateCheckout', { content_name: 'Black Breeze Sandals', content_ids: ['black-breeze-sandals-001'], value: 799, currency: 'UAH', num_items: 1 });
-  ttTrack('InitiateCheckout', { content_type: 'product', content_id: 'black-breeze-sandals-001', content_ids: ['black-breeze-sandals-001'], content_name: 'Black Breeze Sandals', value: 799, currency: 'UAH', quantity: 1 });
+  const checkoutEventId = fbTrack('InitiateCheckout', { content_name: 'Black Breeze Sandals', content_ids: ['black-breeze-sandals-001'], value: 699, currency: 'UAH', num_items: 1 });
+  ttTrack('InitiateCheckout', { content_type: 'product', content_id: 'black-breeze-sandals-001', content_ids: ['black-breeze-sandals-001'], content_name: 'Black Breeze Sandals', value: 699, currency: 'UAH', quantity: 1 });
   Analytics.track('form_submit', { size, viaTelegram: viaTg });
 
   orderSubmitting = false;
@@ -837,7 +837,7 @@ window.addEventListener('beforeunload', () => {
     clientOrderKey: pendingOrderKey,
     meta: metaBrowserData(leadEventId),
     product: 'Black Breeze Sandals',
-    price: '799',
+    price: '699',
   };
   try {
     navigator.sendBeacon(`${API}/api/order`, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
@@ -859,7 +859,7 @@ const STATIC_REVIEWS = [
   { id: 8, name: 'Катерина, Полтава', rating: 5, text: 'Очень удобные. Брала 37, размер совпал. Под платье смотрятся хорошо, не грубо, хотя подошва плотная.', date: '2026-04-27', deletable: false },
   { id: 9, name: 'Dasha M., Луцьк', rating: 5, text: 'best на літо за ці гроші. ходила в них по набережній кілька годин, ноги живі)) чорний колір топ', date: '2026-04-26', deletable: false },
   { id: 10, name: 'Людмила, Тернопіль', rating: 5, text: 'Замовляла доньці, вона задоволена. Каже легкі і не натирають. Менеджер швидко передзвонив.', date: '2026-04-25', deletable: false },
-  { id: 11, name: 'kristina_ok, Херсон', rating: 4, text: 'нормальні сандалі, за 799 прям добре. Хотіла б ще бежеві, але чорні практичніші.', date: '2026-04-24', deletable: false },
+  { id: 11, name: 'kristina_ok, Херсон', rating: 4, text: 'нормальні сандалі, за 699 прям добре. Хотіла б ще бежеві, але чорні практичніші.', date: '2026-04-24', deletable: false },
   { id: 12, name: 'Оксана В., Чернівці', rating: 5, text: 'Мені сподобалось, що можна поміряти перед оплатою. Ремінець зручний, підошва м’яка, на літо саме воно.', date: '2026-04-23', deletable: false },
   { id: 13, name: 'Марічка, Івано-Франківськ', rating: 5, text: 'Прийшли швидко. На фото думала будуть грубіші, в житті акуратні. Під сарафан виглядають дуже гарно.', date: '2026-04-22', deletable: false },
   { id: 14, name: 'Таня, Чернігів', rating: 5, text: 'взяла 40 на широку ногу, не тисне. цілий день на ногах і без болю, це для мене головне.', date: '2026-04-21', deletable: false },
